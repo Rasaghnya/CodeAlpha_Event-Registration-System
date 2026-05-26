@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event Register</title>
+    <link rel="stylesheet" href="{% static 'css/glass.css' %}">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" style="display:flex;align-items:center;justify-content:space-between">
+        <a class="brand" href="/">EventRegister</a>
+        <div style="display:flex;gap:12px;align-items:center">
+          {% if request.user.is_authenticated %}
+            <a class="btn ghost" href="{% url 'my_registrations' %}">My Registrations</a>
+            <span style="opacity:0.9">{{ request.user.username }}</span>
+            <a class="btn" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <a class="btn ghost" href="{% url 'login' %}">Login</a>
+            <a class="btn" href="{% url 'signup' %}">Sign up</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <main class="page">
+      <div class="page-inner">
+        {% if messages %}
+          <div style="max-width:1100px;margin:12px auto">
+            {% for message in messages %}
+              <div class="glass-card" style="padding:10px;border-left:4px solid rgba(255,255,255,0.08)">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="site-footer">Built with ♥ • Glassmorphism UI</footer>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

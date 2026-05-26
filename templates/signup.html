@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="container">
+    <div class="glass-card" style="max-width:520px;margin:0 auto">
+      <h2>Create an account</h2>
+      <form method="post">
+        {% csrf_token %}
+        <label>Username</label>
+        <input name="username" required class="input" />
+        <label>Email</label>
+        <input name="email" type="email" required class="input" />
+        <label>Password</label>
+        <input name="password" type="password" required class="input" />
+        <label>Contact No</label>
+        <input name="contact_no" class="input" />
+        <label>Age</label>
+        <input name="age" type="number" class="input" />
+        <div style="margin-top:12px">
+          <button class="btn" type="submit">Sign up</button>
+          <a class="btn ghost" href="{% url 'login' %}">Login</a>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
